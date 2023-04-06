@@ -101,6 +101,8 @@ body {
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--primary-text-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .address-list {
@@ -142,15 +144,36 @@ body {
 }
 
 .nav-link {
-  display: block;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
   padding-top: 24px;
   padding-bottom: 24px;
-
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--title-text-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.current-page {
+  color: var(--hover-text-color);
+}
+
+.current-page::after {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  content: '';
+  width: 100%;
+  height: 4px;
+  background-color: var(--button-bg-hover-color);
+  border-radius: 2px;
+  bottom: -1px;
 }
 
 .address-contact {
@@ -164,7 +187,7 @@ body {
   padding-top: 188px;
   padding-bottom: 188px;
   background-color: var(--secondary-bg-color);
-  /* text-align: center; */
+  text-align: center;
 }
 
 .overlay {
@@ -182,6 +205,7 @@ body {
   background-position: center;
   background-size: cover;
 }
+
 .hero-title {
   margin-bottom: 48px;
   margin-left: auto;
@@ -212,6 +236,8 @@ body {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   border: none;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-button:hover,
@@ -352,6 +378,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .team-box .social-link:is(:hover, :focus) {
@@ -394,6 +422,9 @@ body {
   padding-top: 16px;
   padding-bottom: 16px;
   color: #8e8f99;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .customers-link-logo {
@@ -452,6 +483,10 @@ body {
   background: var(--accent-bg-color);
   border: 1px solid #e7e9fc;
   border-radius: 4px;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .samples-button:hover,
@@ -480,10 +515,44 @@ body {
 
 .samples-link {
   display: inline-block;
+
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .samples-link:hover {
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+
+.samples-link:hover .samples-overlay {
+  transform: translateY(0);
+}
+
+.samples-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.samples-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+  padding-left: 32px;
+  padding-right: 32px;
+  background-color: var(--button-bg-hero-color);
+  transform: translateY(100%);
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-overlay {
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--logo-footer-text-color);
+  background-color: var(--button-bg-hero-color);
 }
 
 /* footer */
@@ -557,4 +626,66 @@ body {
 
 .footer-social-box .social-link:is(:hover, :focus) {
   background-color: #31d0aa;
+}
+
+/* modal window */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transform: scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 24px;
+  width: 408px;
+  min-height: 576px;
+  background-color: #fcfcfc;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.modal-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 336px;
+  margin-right: 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.close-btn-svg {
+  fill: #2e2f42;
+  background-color: #e7e9fc;
+}
+
+.backdrop.is-hidden {
+  transform: scale(1.1);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
